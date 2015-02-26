@@ -1,5 +1,6 @@
 package templates;
 
+import java.awt.Graphics2D;
 import java.awt.Polygon;
 
 public class CShape extends Polygon {
@@ -52,6 +53,11 @@ public class CShape extends Polygon {
 
 	public double getSlope() {
 		return slope;
+	}
+	
+	public void draw(Graphics2D g) {
+		
+		g.fill(this);
 	}
 
 }
