@@ -1,12 +1,16 @@
 package game;
 
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -17,45 +21,66 @@ public class Setup {
 		Setup s = new Setup();
 		JLabel message = new JLabel("Let's Play Mini Golf!", JLabel.CENTER);
 
-		JRow players = s.new JRow("How many players?", 1);
+		JPanel players = createRow("How many players?", "1", 1);
 
-		JRow p1 = s.new JRow("Name?", 5);
-		JRow p2 = s.new JRow("Name?", 5);
-		JRow p3 = s.new JRow("Name?", 5);
-		JRow p4 = s.new JRow("Name?", 5);
+		JPanel p1 = createRow("Name?", "Player", 5);
+		JPanel p2 = createRow("Name?", 5);
+		JPanel p3 = createRow("Name?", 5);
+		JPanel p4 = createRow("Name?", 5);
+		
+		p1.setEnabled(true);
+		p2.setEnabled(false);
+		p3.setEnabled(false);
+		p4.setEnabled(false);
 
+		JPanel numberOfHoles = createRow("Number of holes to play?", 2);
+/*
 		ActionListener playerNumListener = new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 
-				p1.disable();
-				p2.disable();
-				p3.disable();
-				p4.disable();
+				p1.setEnabled(false);
+				p2.setEnabled(false);
+				p3.setEnabled(false);
+				p4.setEnabled(false);
 
-				switch (players.l.getText()) {
+				switch (((JTextField) players.getComponent(2)).getText()) {
 
 				case "4":
-					p4.enable();
+					p4.setEnabled(true);
 
 				case "3":
-					p3.enable();
+					p3.setEnabled(true);
 
 				case "2":
-					p2.enable();
+					p2.setEnabled(true);
 
 				default:
-					p1.enable();
+					p1.setEnabled(true);
 
 				}
 
 			}
 		};
 
-		players.getField().addActionListener(playerNumListener);
-		
+		ActionListener holeNumListener = new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (Integer.parseInt(((JTextField) numberOfHoles.getComponent(2)).getText()) > 6) {
+					((JTextField) numberOfHoles.getComponent(2)).setText("6");
+
+				}
+
+			}
+
+		};
+
+		((JTextField)players.getComponent(2)).addActionListener(playerNumListener);
+		((JTextField) numberOfHoles.getComponent(2)).addActionListener(holeNumListener);
+*/
 		JPanel inputPanel = new JPanel();
 
 		inputPanel.setLayout(new GridLayout(0, 1, 5, 5));
@@ -63,55 +88,54 @@ public class Setup {
 				BorderFactory.createLineBorder(Color.BLACK, 2),
 				BorderFactory.createEmptyBorder(6, 6, 6, 6)));
 
+		inputPanel.add(message);
+
+		inputPanel.add(players);
+
+		inputPanel.add(p1);
+
+		inputPanel.add(p2);
+
+		inputPanel.add(p3);
+
+		inputPanel.add(p4);
+
+		while (true) {
+
+			int action = JOptionPane.showConfirmDialog(null, inputPanel,
+					"Mini Golf", JOptionPane.OK_CANCEL_OPTION,
+					JOptionPane.PLAIN_MESSAGE);
+
+			if (action != JOptionPane.OK_OPTION)
+				return;
+
+		}
+
 	}
 
 	public Setup() {
 		// TODO Auto-generated constructor stub
 	}
 
-	private class JRow {
-
-		JLabel l;
-		JTextField t;
-
-		public JRow(String message, int tbLength) {
-			l = new JLabel(message, JLabel.CENTER);
-			t = new JTextField(tbLength);
-
-		}
-
-		public JRow(String message) {
-			l = new JLabel(message, JLabel.CENTER);
-			t = new JTextField();
-
-		}
-
-		public JRow(String message, String boxDefault, int tbLength) {
-			l = new JLabel(message, JLabel.CENTER);
-			t = new JTextField(boxDefault, 2);
-
-		}
-
-		public JLabel getLabel() {
-			return l;
-		}
-
-		public JTextField getField() {
-			return t;
-		}
-
-		public void disable() {
-
-			l.setEnabled(false);
-			t.setEnabled(false);
-
-		}
-
-		public void enable() {
-
-			l.setEnabled(true);
-			t.setEnabled(true);
-		}
-
-	}
+	public static JPanel createRow(String labelText, int textWidth) {
+    	JPanel row = new JPanel();
+    	 row = new JPanel();
+         row.setLayout(new FlowLayout(FlowLayout.LEFT));        
+         row.add(Box.createHorizontalStrut(40));
+         row.add(new JLabel(labelText));
+         row.add(new JTextField(textWidth));
+         return row;
+    	
+    }
+	
+	public static JPanel createRow(String labelText, String defaultText, int textWidth) {
+    	JPanel row = new JPanel();
+    	 row = new JPanel();
+         row.setLayout(new FlowLayout(FlowLayout.LEFT));        
+         row.add(Box.createHorizontalStrut(40));
+         row.add(new JLabel(labelText));
+         row.add(new JTextField(defaultText, textWidth));
+         return row;
+    	
+    }
 }
