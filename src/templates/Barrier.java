@@ -5,23 +5,23 @@ import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.awt.geom.Line2D;
 
-public class Barriers extends Polygon {
+public class Barrier extends Polygon {
 
 	private int[] xpoints;
 	private int[] ypoints;
 
-	public Barriers() {
+	public Barrier() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Barriers(int[] xpoints, int[] ypoints, int npoints) {
+	public Barrier(int[] xpoints, int[] ypoints, int npoints) {
 		super(xpoints, ypoints, npoints);
 		// TODO Auto-generated constructor stub
 		this.xpoints = xpoints;
 		this.ypoints = ypoints;
 	}
 
-	public Barriers(Rectangle s) {
+	public Barrier(Rectangle s) {
 
 		xpoints = new int[4];
 		ypoints = new int[4];
@@ -39,7 +39,7 @@ public class Barriers extends Polygon {
 		ypoints[3] = s.y + s.height;
 	}
 
-	public Barriers(int x, int y, int w, int h) {
+	public Barrier(int x, int y, int w, int h) {
 
 		xpoints = new int[4];
 		ypoints = new int[4];
@@ -58,13 +58,13 @@ public class Barriers extends Polygon {
 
 	}
 
-	public Barriers(Polygon s) {
+	public Barrier(Polygon s) {
 		this.xpoints = s.xpoints;
 		this.ypoints = s.ypoints;
 
 	}
 
-	public Barriers(Line2D s) {
+	public Barrier(Line2D s) {
 
 		xpoints = new int[2];
 		ypoints = new int[2];
@@ -77,7 +77,7 @@ public class Barriers extends Polygon {
 
 	}
 
-	public Barriers(int[] x, int[] y) {
+	public Barrier(int[] x, int[] y) {
 
 		xpoints = x;
 		ypoints = y;
