@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.LayoutManager;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import templates.CShape;
 import templates.Map;
 import templates.Players;
 import templates.Turn;
@@ -22,6 +24,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public ArrayList<Map> maps = new ArrayList<Map>();
 	public ArrayList<Players> object = new ArrayList<Players>();
 	public Turn pt = new Turn();
+	
+	public int holeNum = 1;
+	
+	public Point ball;
 	
 	public GamePanel() {
 		// TODO Auto-generated constructor stub
@@ -72,11 +78,20 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	public void drawBall(Graphics2D g) {
 		// TODO Auto-generated method stub
-		
+		g.fillOval(ball.x, ball.y, 5, 5);
 	}
 
 	public void drawMap(Graphics2D g) {
 		// TODO Auto-generated method stub
+		
+			Map m = maps.get(holeNum - 1);
+			
+			for (CShape s : m.getSurfaces()) {
+				
+				s.draw(g);
+				
+			}
+			
 		
 	}
 

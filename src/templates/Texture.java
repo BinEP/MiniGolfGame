@@ -4,7 +4,7 @@ public class Texture {
 
 	public double t = MEDIUM;
 	
-	public Texture(int t) {
+	public Texture(double t) {
 		// TODO Auto-generated constructor stub
 		this.t = t;
 	}
