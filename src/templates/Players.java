@@ -36,5 +36,9 @@ public class Players extends JPanel {
 		// TODO Auto-generated method stub
 		players.get(pt.turn - 1).drawStats(g);
 	}
+	
+	public void addStroke() {
+		players.get(pt.turn - 1).addStroke();
+	}
 
 }
