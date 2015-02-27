@@ -16,12 +16,16 @@ public class Hole1 extends Map {
 	
 	public Hole1() {
 		// TODO Auto-generated constructor stub
+		setSurfaces();
 	}
 
 	@Override
 	public void setSurfaces() {
 		// TODO Auto-generated method stub
-		
+		int[] x = {17, 20, 37, 52, 72, 94, 114, 143, 165, 187, 209, 238, 266, 294, 325, 348, 374, 417, 454, 472, 468, 296, 288, 284, 273, 266, 253, 240, 226, 221, 209, 198, 192};
+		int[] y = {472, 81, 74, 66, 59, 49, 48, 41, 40, 36, 36, 36, 37, 42, 46, 52, 56, 62, 63, 68, 479, 477, 297, 288, 286, 282, 284, 285, 287, 294, 292, 465, 472};
+
+		surfaces.add(new CShape(x, y, x.length));
 	}
 
 	@Override
@@ -150,10 +154,7 @@ public CShape getShape(Point p) {
 	public ArrayList<CShape> getSurfaces() {
 		// TODO Auto-generated method stub
 		
-		int[] x = {17, 20, 37, 52, 72, 94, 114, 143, 165, 187, 209, 238, 266, 294, 325, 348, 374, 417, 454, 472, 468, 296, 288, 284, 273, 266, 253, 240, 226, 221, 209, 198, 192};
-		int[] y = {472, 81, 74, 66, 59, 49, 48, 41, 40, 36, 36, 36, 37, 42, 46, 52, 56, 62, 63, 68, 479, 477, 297, 288, 286, 282, 284, 285, 287, 294, 292, 465, 472};
-
-		surfaces.add(new CShape(x, y, x.length));
+		
 		
 		return surfaces;
 	}
