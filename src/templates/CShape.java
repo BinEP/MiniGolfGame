@@ -124,7 +124,8 @@ public class CShape extends Polygon {
 
 	public void draw(Graphics2D g) {
 
-		g.fill(this);
+		g.draw(this);
+		
 	}
 
 }
