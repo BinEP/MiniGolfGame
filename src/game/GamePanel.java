@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
 import java.awt.LayoutManager;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,7 +14,11 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.Ellipse2D;
+import java.awt.geom.Line2D;
+import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
@@ -144,12 +149,15 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener,
 	public void moves() {
 		// TODO Auto-generated method stub
 
+		
+		calculateBarriers();
 		ballX += deltaX;
 		ballY += deltaY;
-
-//		CShape s = hole.getShape(ball);
-//		System.out.println("Texture: " + s.getTexture());
 		
+//		calculateBarriers();
+		// CShape s = hole.getShape(ball);
+		// System.out.println("Texture: " + s.getTexture());
+
 		if (ballMoving) {
 			double angle = Math.atan(deltaY / deltaX);
 			ballSpeed *= 0.9;
@@ -165,6 +173,68 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener,
 		checkInHole();
 		repaint();
 
+	}
+
+	public void calculateBarriers() {
+		// TODO Auto-generated method stub
+
+		if (hole.checkCollision(ballX, ballY)) {
+			rotateBallDirection();
+		}
+
+		Graphics2D g = (Graphics2D) this.getGraphics();
+		if (g != null) {
+			g.setStroke(new BasicStroke(4));
+			g.drawLine(50, 50, (int) (50 + ballX), (int) (50 + ballY));
+		}
+	}
+
+	public void rotateBallDirection() {
+
+		// Polygon b = hole.getBarriers(ballX, ballY);
+
+		double angle = getAngle();
+		// Line2D.Double line = b.getLineSeg(ballX, ballY);
+
+		rotate(angle, ballX, ballY);
+
+	}
+
+	public void rotate(double angle, double endX, double endY) {
+
+		double theCos = Math.cos(angle);
+		double theSin = Math.sin(angle);
+
+		double[][] rotationMatrix = { { theCos, -theSin }, { theSin, theCos } };
+
+		// double startXVal = rotationMatrix[0][0] * startX +
+		// rotationMatrix[0][1] * startY;
+		// double startYVal = rotationMatrix[1][0] * startX +
+		// rotationMatrix[1][1] * startY;
+
+		double endXVal = rotationMatrix[0][0] * endX + rotationMatrix[0][1]
+				* endY;
+		double endYVal = rotationMatrix[1][0] * endX + rotationMatrix[1][1]
+				* endY;
+
+		ballX = endXVal;
+		ballY = endYVal;
+
+	}
+
+	public double getAngle() {
+
+		double[] ballSlope = hole.getLineSlopeArr(ballX, ballY);
+		double[] lineSlope = hole.getLineSlopeArr(ballX, ballY);
+
+		ballSlope = hole.getUnit(ballSlope[0], ballSlope[1]);
+		lineSlope = hole.getUnit(lineSlope[0], lineSlope[1]);
+
+		double lSlope = ballSlope[1] / ballSlope[0];
+		double bSlope = lineSlope[1] / lineSlope[0];
+
+		double angle = 180 - 2 * Math.acos(bSlope / lSlope);
+		return angle;
 	}
 
 	public void checkInHole() {
@@ -183,7 +253,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener,
 
 	public void nextHole() {
 		// TODO Auto-generated method stub
-		
+
 		if (!(holeNum + 1 > holes.size())) {
 			holeNum++;
 			System.out.println("Next hole");
@@ -240,39 +310,40 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener,
 			//
 			// Point relativeP = new Point(mouseP.x - screenP.x, mouseP.y -
 			// screenP.y);
-			Point relativeP = new Point(mouseP.x - (int) ballX, mouseP.y - (int) ballY);
+			Point relativeP = new Point(mouseP.x - (int) ballX, mouseP.y
+					- (int) ballY);
 
 			// relativeP.x *= 3;
 			// relativeP.y *= 3;
 
-//			double d = relativeP.distance(ball);
-//			double d = mouseP.distance(ball);
-//			System.out.println("Distance: " + d);
-//			ballSpeed = d;
+			// double d = relativeP.distance(ball);
+			// double d = mouseP.distance(ball);
+			// System.out.println("Distance: " + d);
+			// ballSpeed = d;
 
-//			int numerator = relativeP.y;
-//			numerator -= numerator % 5;
+			// int numerator = relativeP.y;
+			// numerator -= numerator % 5;
 
-//			int denominator = relativeP.x;
-//			denominator -= denominator % 5;
+			// int denominator = relativeP.x;
+			// denominator -= denominator % 5;
 
 			// System.out.println("Rounded to 5");
 			// System.out.println(numerator);
 			// System.out.println(denominator);
 
-//			int div = Math.abs(gcm(numerator, denominator));
-//			numerator /= div;
-//			denominator /= div;
+			// int div = Math.abs(gcm(numerator, denominator));
+			// numerator /= div;
+			// denominator /= div;
 
 			// deltaY = (int) Math.ceil((double) numerator / 10);
 			// deltaX = (int) Math.ceil((double) denominator / 10);
 
-//			System.out.println("Lowest common denom");
-//			System.out.println(numerator);
-//			System.out.println(denominator);
+			// System.out.println("Lowest common denom");
+			// System.out.println(numerator);
+			// System.out.println(denominator);
 
-//			deltaY = (int) (numerator * 1.7);
-//			deltaX = (int) (denominator * 1.7);
+			// deltaY = (int) (numerator * 1.7);
+			// deltaX = (int) (denominator * 1.7);
 			deltaY = relativeP.y / 9d;
 			deltaX = relativeP.x / 9d;
 			ballMoving = true;
