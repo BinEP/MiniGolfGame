@@ -141,9 +141,9 @@ public class Hole1 extends Map {
 		return false;
 	}
 
-	public double getLineSlope(double ballX, double ballY) {
+	public double getLineSlope(double ballX, double ballY, double deltaX, double deltaY) {
 
-		Line2D.Double lineSeg = getLineSeg(ballX, ballY);
+		Line2D.Double lineSeg = getLineSeg(ballX, ballY, deltaX, deltaY);
 
 		Point2D p1 = lineSeg.getP1();
 		Point2D p2 = lineSeg.getP2();
@@ -153,9 +153,9 @@ public class Hole1 extends Map {
 
 	}
 
-	public double[] getLineSlopeArr(double ballX, double ballY) {
+	public double[] getLineSlopeArr(double ballX, double ballY, double deltaX, double deltaY) {
 
-		Line2D.Double lineSeg = getLineSeg(ballX, ballY);
+		Line2D.Double lineSeg = getLineSeg(ballX, ballY, deltaX, deltaY);
 
 		Point2D p1 = lineSeg.getP1();
 		Point2D p2 = lineSeg.getP2();
@@ -165,8 +165,12 @@ public class Hole1 extends Map {
 
 	}
 
-	public Line2D.Double getLineSeg(double ballX, double ballY) {
-
+	public Line2D.Double getLineSeg(double ballX, double ballY, double deltaX, double deltaY) {
+		
+		System.out.println("Ball X: " + ballX);
+		System.out.println("Ball Y: " + ballY);
+		System.out.println();
+		
 		Polygon bar = getBarriers(ballX, ballY);
 
 		int[] xpoints = bar.xpoints;
@@ -174,7 +178,7 @@ public class Hole1 extends Map {
 		int npoints = bar.npoints;
 
 		Line2D.Double lineSeg = new Line2D.Double();
-		Rectangle r = new Rectangle();
+		Line2D.Double r = new Line2D.Double(ballX - deltaX, ballY - deltaY, ballX, ballY);
 
 		for (int i = 0; i < npoints - 1; i++) {
 
@@ -185,11 +189,10 @@ public class Hole1 extends Map {
 			int y2 = ypoints[i + 1];
 
 			lineSeg.setLine(x1, y1, x2, y2);
-			r.setBounds((int) ballX, (int) ballY, 10, 10);
 
 			if (i > 30) {
-				System.out.println(lineSeg.ptLineDist(ballX, ballY));
-				if (lineSeg.intersects(r)) {
+//				System.out.println(lineSeg.ptLineDist(ballX, ballY));
+				if (lineSeg.intersectsLine(r)) {
 					return lineSeg;
 
 				}

@@ -37,7 +37,7 @@ public abstract class Map {
 	public abstract boolean checkCollision(double ballX, double ballY);
 
 
-	public abstract double[] getLineSlopeArr(double ballX, double ballY);
+	public abstract double[] getLineSlopeArr(double ballX, double ballY, double deltaX, double deltaY);
 
 
 	public abstract double[] getUnit(double d, double e);
