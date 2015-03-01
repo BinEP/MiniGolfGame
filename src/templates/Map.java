@@ -1,5 +1,8 @@
 package templates;
 
+import game.GamePanel;
+
+import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Polygon;
 import java.util.ArrayList;
@@ -41,6 +44,7 @@ public abstract class Map {
 
 
 	public abstract double[] getUnit(double d, double e);
-	
+	public abstract void setG(Graphics2D g);
+	public abstract void setGame(GamePanel game);
 	
 }

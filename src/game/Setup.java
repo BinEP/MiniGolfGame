@@ -118,7 +118,7 @@ public class Setup {
 			
 			//so doesn't flicker
 			frame.setResizable(false);
-			frame.setAlwaysOnTop(false);
+			frame.setAlwaysOnTop(true);
 			
 //			frame.setAlwaysOnTop(true);
 

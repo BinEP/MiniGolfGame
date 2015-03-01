@@ -1,5 +1,9 @@
 package maps;
 
+import game.GamePanel;
+
+import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.Rectangle;
@@ -17,6 +21,9 @@ public class Hole1 extends Map {
 	private ArrayList<Polygon> barrier = new ArrayList<Polygon>();
 	private CShape defaultShape = new CShape(0, 0, 500, 500, new Texture(
 			Texture.MEDIUM));
+	
+	public Graphics2D g;
+	public GamePanel game;
 
 	public Hole1() {
 		// TODO Auto-generated constructor stub
@@ -178,8 +185,8 @@ public class Hole1 extends Map {
 		int npoints = bar.npoints;
 
 		Line2D.Double lineSeg = new Line2D.Double();
-		Line2D.Double r = new Line2D.Double(ballX - deltaX, ballY - deltaY, ballX, ballY);
-
+		Line2D.Double r = new Line2D.Double(ballX - deltaX - 3, ballY - deltaY, ballX + 10, ballY + 5);
+		
 		for (int i = 0; i < npoints - 1; i++) {
 
 			int x1 = xpoints[i];
@@ -189,14 +196,20 @@ public class Hole1 extends Map {
 			int y2 = ypoints[i + 1];
 
 			lineSeg.setLine(x1, y1, x2, y2);
-
-			if (i > 30) {
+			
+			Graphics2D g = (Graphics2D) game.getGraphics();
+			game.paintComponent(g);
+			g.setColor(Color.RED);
+			g.draw(lineSeg);
+			g.draw(r);
+			game.repaint();
+			
 //				System.out.println(lineSeg.ptLineDist(ballX, ballY));
 				if (lineSeg.intersectsLine(r)) {
 					return lineSeg;
 
 				}
-			}
+			
 
 		}
 		return null;
@@ -211,6 +224,18 @@ public class Hole1 extends Map {
 
 		double[] slopes = { slopeY, slopeX };
 		return slopes;
+	}
+
+	@Override
+	public void setG(Graphics2D g) {
+		// TODO Auto-generated method stub
+		this.g = g;
+	}
+
+	@Override
+	public void setGame(GamePanel game) {
+		// TODO Auto-generated method stub
+		this.game = game;
 	}
 
 }

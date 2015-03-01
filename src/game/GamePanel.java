@@ -91,6 +91,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener,
 
 		super.paintComponent(g2);
 		Graphics2D g = (Graphics2D) g2;
+		hole.setG(g);
+		hole.setGame(this);
 		drawMouse(g);
 		drawHole(g);
 		drawBall(g);
