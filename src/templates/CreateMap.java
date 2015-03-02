@@ -1,5 +1,6 @@
 package templates;
 
+import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -23,8 +24,11 @@ public class CreateMap {
 	public ArrayList<Point> points = new ArrayList<Point>();
 	public Polygon shape = new Polygon();
 
+	public Point hole;
+	public Point start;
+	
 	public ArrayList<Polygon> shapes = new ArrayList<Polygon>();
-
+	
 	public static void main(String[] args) {
 		new CreateMap();
 	}
@@ -44,7 +48,7 @@ public class CreateMap {
 
 		
 		JPanel buttons = new JPanel();
-		buttons.setLayout(new BorderLayout());
+		buttons.setLayout(new FlowLayout());
 		
 		JButton newShape = new JButton("New Shape");
 		newShape.setActionCommand("NewShape");
@@ -52,14 +56,22 @@ public class CreateMap {
 		resetButton.setActionCommand("Reset");
 		JButton doneButton = new JButton("Done");
 		doneButton.setActionCommand("Done");
+		JButton holeButton = new JButton("Hole");
+		holeButton.setActionCommand("Hole");
+		JButton startButton = new JButton("Start");
+		startButton.setActionCommand("Start");
 		
 		newShape.addActionListener(game);
 		resetButton.addActionListener(game);
 		doneButton.addActionListener(game);
+		holeButton.addActionListener(game);
+		startButton.addActionListener(game);
 		
-		buttons.add(newShape, BorderLayout.WEST);
-		buttons.add(doneButton, BorderLayout.CENTER);
-		buttons.add(resetButton, BorderLayout.EAST);
+		buttons.add(newShape);
+		buttons.add(doneButton);
+		buttons.add(resetButton);
+		buttons.add(startButton);
+		buttons.add(holeButton);
 
 		frame.add(buttons, BorderLayout.NORTH);
 		frame.add(game, BorderLayout.CENTER);
@@ -94,8 +106,15 @@ public class CreateMap {
 				shape = new Polygon();
 				System.out.println("Shape 1 Points");
 			} else if ("Done".equals(e.getActionCommand())) {
-				
 				getFormatString();
+			} else if ("Start".equals(e.getActionCommand())) {
+				start = points.get(points.size() - 1);
+				shape = new Polygon();
+				
+			} else if ("Hole".equals(e.getActionCommand())) {
+				
+				hole = points.get(points.size() - 1);
+				shape = new Polygon();
 			}
 			repaint();
 		}
@@ -112,13 +131,13 @@ public class CreateMap {
 
 			int j = 1;
 			for (Polygon poly : shapes) {
-				System.out.println("Shape Points");
+//				System.out.println("Shape Points");
 				for (int i = 0; i < poly.xpoints.length; i++) {
 					xp.add(poly.xpoints[i]);
 					yp.add(poly.ypoints[i]);
 				}
 				
-				System.out.println("Print points");
+//				System.out.println("Print points");
 				System.out.print("int[] x" + j + " = {");
 				
 				for (Integer i : xp) {
@@ -128,6 +147,7 @@ public class CreateMap {
 				
 				System.out.println();
 				
+				
 				System.out.print("int[] y" + j + " = {");
 				for (Integer i : yp) {
 					System.out.print(i + ", ");
@@ -135,6 +155,11 @@ public class CreateMap {
 				System.out.print("};");
 				
 				System.out.println();
+				System.out.println("addSurface(x" + j + ", y" + j + ");");
+				System.out.println("addBarrier(x" + j + ", y" + j + ");");
+				System.out.println();
+				System.out.println("new Point(" + hole.x + ", " + hole.y + ");");
+				System.out.println("new Point(" + start.x + ", " + start.y + ");");
 				x.add(xp);
 				y.add(yp);
 				xp.clear();
@@ -158,6 +183,15 @@ public class CreateMap {
 			for (Polygon p : shapes) {
 
 				g.drawPolygon(p);
+			}
+			
+			Graphics2D g3 = (Graphics2D) g.create();
+			if (start != null) {
+				g.fillOval(start.x, start.y, 10, 10);
+			}
+			g3.setStroke(new BasicStroke(4));
+			if (hole != null) {
+				g3.drawOval(hole.x, hole.y, 20, 20);
 			}
 		}
 
