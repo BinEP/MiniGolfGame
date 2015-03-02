@@ -219,14 +219,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener,
 
 	public double getAngle() {
 
-		double[] ballSlope = hole.getLineSlopeArr(ballX, ballY, deltaX, deltaY);
+		double[] ballSlope = {deltaX, deltaY};
 		double[] lineSlope = hole.getLineSlopeArr(ballX, ballY, deltaX, deltaY);
 
 		ballSlope = hole.getUnit(ballSlope[0], ballSlope[1]);
 		lineSlope = hole.getUnit(lineSlope[0], lineSlope[1]);
 
-		double lSlope = ballSlope[1] / ballSlope[0];
-		double bSlope = lineSlope[1] / lineSlope[0];
+		double bSlope = ballSlope[1] / ballSlope[0];
+		double lSlope = lineSlope[1] / lineSlope[0];
 
 		double angle = 180 - 2 * Math.acos(bSlope / lSlope);
 		return angle;
