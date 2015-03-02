@@ -140,9 +140,9 @@ public class Map {
 
 	public Line2D.Double getLineSeg(double ballX, double ballY, double deltaX, double deltaY) {
 		
-		System.out.println("Ball X: " + ballX);
-		System.out.println("Ball Y: " + ballY);
-		System.out.println();
+//		System.out.println("Ball X: " + ballX);
+//		System.out.println("Ball Y: " + ballY);
+//		System.out.println();
 		
 		Polygon bar = getBarriers(ballX, ballY);
 

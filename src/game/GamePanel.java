@@ -149,7 +149,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener,
 		double prevDeltaX = deltaX;
 		double prevDeltaY = deltaY;
 		
-		calculateBarriers();
+		if (calculateBarriers()) {
+			
+			ballX -= prevDeltaX;
+			ballY -= prevDeltaY;
+			ballX += deltaX;
+			ballY += deltaY;
+		}
+		
 
 		// calculateBarriers();
 		// CShape s = hole.getShape(ball);
