@@ -2,6 +2,7 @@ package templates;
 
 import game.GamePanel;
 
+import java.awt.BasicStroke;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Polygon;
@@ -177,15 +178,28 @@ public class Map {
 			
 
 		}
-		return null;
+		
+		if (ballY < 10) {
+			return new Line2D.Double(0, 0, 500, 0);
+		} else if (ballY > 490) {
+			return new Line2D.Double(0, 500, 500, 500);
+		} else if (ballX < 10) {
+			return new Line2D.Double(0, 0, 0, 500);
+		} else {
+			return new Line2D.Double(500, 0, 500, 500);
+		}
 	}
 
 	public double[] getUnit(double slopeX, double slopeY) {
 
 		double slopeScale = Math.sqrt(slopeX * slopeX + slopeY * slopeY);
-
+		System.out.println("Slope Scale: " + slopeScale);
+		
 		slopeY /= slopeScale;
 		slopeX /= slopeScale;
+		
+		System.out.println("Slope Y: " + slopeY);
+		System.out.println("Slope X: " + slopeX);
 
 		double[] slopes = { slopeY, slopeX };
 		return slopes;
@@ -194,5 +208,22 @@ public class Map {
 	public void setGame(GamePanel game) {
 		// TODO Auto-generated method stub
 		this.game = game;
+	}
+	
+	public void draw(Graphics2D g) {
+		
+		g.setStroke(new BasicStroke(4));
+
+		for (Polygon s : barrier) {
+
+			g.draw(s);
+
+		}
+//		g.draw(defaultShape);
+		Point h = getHole();
+		g.drawOval(h.x, h.y, 20, 20);
+		
+		
+		
 	}
 }

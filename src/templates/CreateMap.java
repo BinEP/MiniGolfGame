@@ -130,7 +130,7 @@ public class CreateMap {
 				
 				System.out.print("int[] y" + j + " = {");
 				for (Integer i : yp) {
-					System.out.print((i - 30) + ", ");
+					System.out.print(i + ", ");
 				}
 				System.out.print("};");
 				

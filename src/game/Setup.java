@@ -126,7 +126,7 @@ public class Setup {
 //			frame.add((Component) gameClass.cast(game), BorderLayout.CENTER);
 			frame.add(game, BorderLayout.CENTER);
 
-			frame.setSize(500, 500);
+			frame.setSize(500, 522);
 			frame.setVisible(true);
 
 //		}
