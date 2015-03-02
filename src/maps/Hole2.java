@@ -9,6 +9,7 @@ public class Hole2 extends MapMethods {
 
 	public Hole2() {
 		// TODO Auto-generated constructor stub
+	super();
 	}
 
 	@Override
