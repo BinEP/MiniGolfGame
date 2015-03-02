@@ -79,6 +79,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener,
 		// TODO Auto-generated method stub
 		holes.add(new Hole1());
 		holes.add(new Hole2());
+		holes.add(new Hole3());
+		
 	}
 
 	@Override
