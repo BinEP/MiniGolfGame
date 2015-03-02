@@ -145,10 +145,13 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener,
 
 		ballX += deltaX;
 		ballY += deltaY;
+
+		double prevDeltaX = deltaX;
+		double prevDeltaY = deltaY;
 		
 		calculateBarriers();
-		
-//		calculateBarriers();
+
+		// calculateBarriers();
 		// CShape s = hole.getShape(ball);
 		// System.out.println("Texture: " + s.getTexture());
 
@@ -158,29 +161,24 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener,
 			deltaX = ballSpeed * Math.cos(angle) * (deltaX < 0 ? -1 : 1);
 			deltaY = ballSpeed * Math.sin(angle) * (deltaX < 0 ? -1 : 1);
 		}
-//		System.out.println("Deltas");
-//		System.out.println("dx:\t" + deltaX);
-//		System.out.println("dy:\t" + deltaY);
-//
-//		System.out.println("Ball Speed: " + ballSpeed);
+		// System.out.println("Deltas");
+		// System.out.println("dx:\t" + deltaX);
+		// System.out.println("dy:\t" + deltaY);
+		//
+		// System.out.println("Ball Speed: " + ballSpeed);
 		checkBallFinished();
 		checkInHole();
 		repaint();
-
 	}
 
-	public void calculateBarriers() {
+	public boolean calculateBarriers() {
 		// TODO Auto-generated method stub
 
 		if (hole.checkCollision(ballX, ballY)) {
 			rotateBallDirection();
+			return true;
 		}
-
-		Graphics2D g = (Graphics2D) this.getGraphics();
-		if (g != null) {
-			g.setStroke(new BasicStroke(4));
-			g.drawLine(50, 50, (int) (50 + ballX), (int) (50 + ballY));
-		}
+		return false;
 	}
 
 	public void rotateBallDirection() {
@@ -196,7 +194,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener,
 
 	public void rotate(double angle, double endX, double endY) {
 
-		angle = Math.toRadians(angle);
+//		angle = Math.toRadians(angle);
 		double theCos = Math.cos(angle);
 		double theSin = Math.sin(angle);
 
@@ -219,17 +217,25 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener,
 
 	public double getAngle() {
 
-		double[] ballSlope = {deltaX, deltaY};
-		double[] lineSlope = hole.getLineSlopeArr(ballX, ballY, deltaX, deltaY);
+		Line2D.Double ballSlope = new Line2D.Double(200, 200, 200 + deltaX * 3, 200 + deltaY * 3);
+		Line2D.Double lineSlope = hole.getLineSeg(ballX, ballY, deltaX, deltaY);
 
-		ballSlope = hole.getUnit(ballSlope[0], ballSlope[1]);
-		lineSlope = hole.getUnit(lineSlope[0], lineSlope[1]);
+		Graphics2D g = (Graphics2D) getGraphics();
+		g.setColor(Color.RED);
+		g.setStroke(new BasicStroke(4));
+		g.draw(ballSlope);
+		g.draw(lineSlope);
+		repaint();
+		
+//		ballSlope = hole.getUnit(ballSlope[0], ballSlope[1]);
+//		lineSlope = hole.getUnit(lineSlope[0], lineSlope[1]);
 
-		double bSlope = ballSlope[1] / ballSlope[0];
-		double lSlope = lineSlope[1] / lineSlope[0];
-
-		double angle = 180 - 2 * Math.acos(bSlope / lSlope);
-		return angle;
+		double angle1 = Math.atan2(ballSlope.getY1() - ballSlope.getY2(), ballSlope.getX1()
+				- ballSlope.getX2());
+		double angle2 = Math.atan2(lineSlope.getY1() - lineSlope.getY2(), lineSlope.getX1()
+				- lineSlope.getX2());
+		
+		return angle1 - angle2;
 	}
 
 	public void checkInHole() {
