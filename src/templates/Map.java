@@ -64,6 +64,22 @@ public class Map {
 		barrier.add(defaultShape);
 	}
 	
+	public void addBarrier(Polygon bar) {
+		barrier.add(bar);
+	}
+	
+	public void addBarrier(int[] x, int[] y) {
+		barrier.add(new Polygon(x, y, x.length));
+	}
+	
+	public void addSurface(CShape bar) {
+		surfaces.add(bar);
+	}
+	
+	public void addSurface(int[] x, int[] y) {
+		surfaces.add(new CShape(x, y, x.length));
+	}
+	
 	public CShape getShape(Point p) {
 		for (CShape s : surfaces) {
 

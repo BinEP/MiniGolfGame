@@ -110,6 +110,7 @@ public class CreateMap {
 			ArrayList<Integer> xp = new ArrayList<Integer>();
 			ArrayList<Integer> yp = new ArrayList<Integer>();
 
+			int j = 1;
 			for (Polygon poly : shapes) {
 				System.out.println("Shape Points");
 				for (int i = 0; i < poly.xpoints.length; i++) {
@@ -118,21 +119,28 @@ public class CreateMap {
 				}
 				
 				System.out.println("Print points");
+				System.out.print("int[] x" + j + " = {");
 				
 				for (Integer i : xp) {
 					System.out.print(i + ", ");
 				}
+				System.out.print("};");
+				
 				System.out.println();
+				
+				System.out.print("int[] y" + j + " = {");
 				for (Integer i : yp) {
 					System.out.print((i - 30) + ", ");
 				}
+				System.out.print("};");
+				
 				System.out.println();
 				x.add(xp);
 				y.add(yp);
 				xp.clear();
 				yp.clear();
+				j++;
 			}
-			
 			
 			return "";
 		}

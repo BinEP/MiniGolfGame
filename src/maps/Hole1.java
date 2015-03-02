@@ -40,7 +40,7 @@ public class Hole1 extends MapMethods {
 				287, 294, 292, 465, 472 };
 
 		// setBarriers(x, y);
-		surfaces.add(new CShape(x, y, x.length));
+		addSurface(x, y);
 	}
 
 	@Override
@@ -53,7 +53,7 @@ public class Hole1 extends MapMethods {
 				46, 52, 56, 62, 63, 68, 479, 477, 297, 288, 286, 282, 284, 285,
 				287, 294, 292, 465, 472 };
 
-		barrier.add(new Polygon(x, y, x.length));
+		addBarrier(x, y);
 	}
 
 	public void setBarriers(int[] x, int[] y) {
