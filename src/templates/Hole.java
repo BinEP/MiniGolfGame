@@ -11,7 +11,7 @@ import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
-public class Map {
+public class Hole {
 
 	public ArrayList<CShape> surfaces = new ArrayList<CShape>();
 	public ArrayList<Polygon> barrier = new ArrayList<Polygon>();
@@ -20,10 +20,9 @@ public class Map {
 	public GamePanel game;
 
 	
-	public Map() {
+	public Hole() {
 		// TODO Auto-generated constructor stub
-		setSurfaces();
-		setBarriers();
+		setStuff();
 	}
 	
 	
@@ -59,9 +58,14 @@ public class Map {
 	}
 	
 	public void setSurfaces() {
-		surfaces.add(defaultShape);
+		setStuff();
 	}
 	public void setBarriers() {
+		
+	}
+	
+	public void setStuff() {
+		surfaces.add(defaultShape);
 		barrier.add(defaultShape);
 	}
 	

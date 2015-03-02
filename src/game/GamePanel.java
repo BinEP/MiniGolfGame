@@ -1,5 +1,7 @@
 package game;
 
+import holes.*;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -27,16 +29,16 @@ import javax.swing.Timer;
 import java.awt.BasicStroke;
 
 import templates.CShape;
-import templates.Map;
+import templates.GetFilesInFolder;
+import templates.Hole;
 import templates.Players;
 import templates.Turn;
-import maps.*;
 
 public class GamePanel extends JPanel implements ActionListener, KeyListener,
 		MouseListener {
 
-	public ArrayList<Map> holes = new ArrayList<Map>();
-	public Map hole;
+	public ArrayList<Hole> holes = new ArrayList<Hole>();
+	public Hole hole;
 	public Players players = new Players();
 	public Turn pt = new Turn();
 
@@ -77,9 +79,27 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener,
 
 	public void setupMaps() {
 		// TODO Auto-generated method stub
-		holes.add(new Hole1());
-		holes.add(new Hole2());
-		holes.add(new Hole3());
+		
+		ArrayList < Class<?>> classes = GetFilesInFolder.getClasses("maps");
+		
+		for (int i = 0; i < classes.size(); i++) {
+			Class c = classes.get(i);
+			try {
+				holes.add((Hole) c.newInstance());
+			} catch (InstantiationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		System.out.println(classes);
+		System.out.println(holes);
+//		holes.add(new Hole1());
+//		holes.add(new Hole2());
+//		holes.add(new Hole3());
 		
 	}
 
@@ -136,7 +156,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener,
 	public void drawHole(Graphics2D g) {
 		// TODO Auto-generated method stub
 
-		Map m = holes.get(holeNum - 1);
+		Hole m = holes.get(holeNum - 1);
 
 		m.draw(g);
 

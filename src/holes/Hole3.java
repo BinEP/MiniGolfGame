@@ -1,10 +1,10 @@
-package maps;
+package holes;
 
 import java.awt.Point;
 
-import templates.MapMethods;
+import templates.HoleMethods;
 
-public class Hole3 extends MapMethods {
+public class Hole3 extends HoleMethods {
 
 	public Hole3() {
 		// TODO Auto-generated constructor stub
@@ -39,12 +39,6 @@ setStuff();
 		int[] y3 = {122, 332, 0, 0, };
 		addSurface(x3, y3);
 		addBarrier(x3, y3);
-	}
-
-	@Override
-	public void setBarriers(int[] x, int[] y) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override

@@ -19,7 +19,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-public class CreateMap {
+public class CreateHole {
 
 	public ArrayList<Point> points = new ArrayList<Point>();
 	public Polygon shape = new Polygon();
@@ -30,10 +30,10 @@ public class CreateMap {
 	public ArrayList<Polygon> shapes = new ArrayList<Polygon>();
 	
 	public static void main(String[] args) {
-		new CreateMap();
+		new CreateHole();
 	}
 
-	public CreateMap() {
+	public CreateHole() {
 		// TODO Auto-generated constructor stub
 
 		JFrame frame = new JFrame("Map Creator");
@@ -158,8 +158,9 @@ public class CreateMap {
 				System.out.println("addSurface(x" + j + ", y" + j + ");");
 				System.out.println("addBarrier(x" + j + ", y" + j + ");");
 				System.out.println();
-				System.out.println("new Point(" + hole.x + ", " + hole.y + ");");
-				System.out.println("new Point(" + start.x + ", " + start.y + ");");
+				System.out.println("Hole, Start");
+				System.out.println("new Point(" + hole.x + ", " + hole.y + ")");
+				System.out.println("new Point(" + start.x + ", " + start.y + ")");
 				x.add(xp);
 				y.add(yp);
 				xp.clear();

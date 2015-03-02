@@ -1,4 +1,4 @@
-package maps;
+package holes;
 
 import game.GamePanel;
 
@@ -12,10 +12,10 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
 import templates.CShape;
-import templates.MapMethods;
+import templates.HoleMethods;
 import templates.Texture;
 
-public class Hole1 extends MapMethods {
+public class Hole1 extends HoleMethods {
 
 	private ArrayList<CShape> surfaces = new ArrayList<CShape>();
 	private ArrayList<Polygon> barrier = new ArrayList<Polygon>();
@@ -27,33 +27,6 @@ public class Hole1 extends MapMethods {
 	public Hole1() {
 		// TODO Auto-generated constructor stub
 		super();
-	}
-
-	@Override
-	public void setSurfaces() {
-		// TODO Auto-generated method stub
-		int[] x = { 17, 20, 37, 52, 72, 94, 114, 143, 165, 187, 209, 238, 266,
-				294, 325, 348, 374, 417, 454, 472, 468, 296, 288, 284, 273,
-				266, 253, 240, 226, 221, 209, 198, 192 };
-		int[] y = { 472, 81, 74, 66, 59, 49, 48, 41, 40, 36, 36, 36, 37, 42,
-				46, 52, 56, 62, 63, 68, 479, 477, 297, 288, 286, 282, 284, 285,
-				287, 294, 292, 465, 472 };
-
-		// setBarriers(x, y);
-		addSurface(x, y);
-	}
-
-	@Override
-	public void setBarriers() {
-		// TODO Auto-generated method stub
-		int[] x = { 17, 20, 37, 52, 72, 94, 114, 143, 165, 187, 209, 238, 266,
-				294, 325, 348, 374, 417, 454, 472, 468, 296, 288, 284, 273,
-				266, 253, 240, 226, 221, 209, 198, 192 };
-		int[] y = { 472, 81, 74, 66, 59, 49, 48, 41, 40, 36, 36, 36, 37, 42,
-				46, 52, 56, 62, 63, 68, 479, 477, 297, 288, 286, 282, 284, 285,
-				287, 294, 292, 465, 472 };
-
-		addBarrier(x, y);
 	}
 
 	public void setBarriers(int[] x, int[] y) {
@@ -71,6 +44,21 @@ public class Hole1 extends MapMethods {
 	public Point getHole() {
 		// TODO Auto-generated method stub
 		return new Point(400, 450);
+	}
+
+	@Override
+	public void setStuff() {
+		// TODO Auto-generated method stub
+		int[] x = { 17, 20, 37, 52, 72, 94, 114, 143, 165, 187, 209, 238, 266,
+				294, 325, 348, 374, 417, 454, 472, 468, 296, 288, 284, 273,
+				266, 253, 240, 226, 221, 209, 198, 192 };
+		int[] y = { 472, 81, 74, 66, 59, 49, 48, 41, 40, 36, 36, 36, 37, 42,
+				46, 52, 56, 62, 63, 68, 479, 477, 297, 288, 286, 282, 284, 285,
+				287, 294, 292, 465, 472 };
+
+		// setBarriers(x, y);
+		addSurface(x, y);
+		addBarrier(x, y);
 	}
 
 	/*
