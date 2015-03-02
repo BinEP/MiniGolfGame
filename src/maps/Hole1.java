@@ -12,10 +12,10 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
 import templates.CShape;
-import templates.Map;
+import templates.MapMethods;
 import templates.Texture;
 
-public class Hole1 extends Map {
+public class Hole1 extends MapMethods {
 
 	private ArrayList<CShape> surfaces = new ArrayList<CShape>();
 	private ArrayList<Polygon> barrier = new ArrayList<Polygon>();
