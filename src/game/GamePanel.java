@@ -136,15 +136,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener,
 
 		Map m = holes.get(holeNum - 1);
 
-		g.setStroke(new BasicStroke(4));
-
-		for (CShape s : m.getSurfaces()) {
-
-			s.draw(g);
-
-		}
-		Point h = m.getHole();
-		g.drawOval(h.x, h.y, 20, 20);
+		m.draw(g);
 
 	}
 
