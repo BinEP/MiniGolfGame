@@ -91,7 +91,6 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener,
 
 		super.paintComponent(g2);
 		Graphics2D g = (Graphics2D) g2;
-		hole.setG(g);
 		hole.setGame(this);
 		drawMouse(g);
 		drawHole(g);
@@ -166,11 +165,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener,
 			deltaX = ballSpeed * Math.cos(angle) * (deltaX < 0 ? -1 : 1);
 			deltaY = ballSpeed * Math.sin(angle) * (deltaX < 0 ? -1 : 1);
 		}
-		System.out.println("Deltas");
-		System.out.println("dx:\t" + deltaX);
-		System.out.println("dy:\t" + deltaY);
-
-		System.out.println("Ball Speed: " + ballSpeed);
+//		System.out.println("Deltas");
+//		System.out.println("dx:\t" + deltaX);
+//		System.out.println("dy:\t" + deltaY);
+//
+//		System.out.println("Ball Speed: " + ballSpeed);
 		checkBallFinished();
 		checkInHole();
 		repaint();
