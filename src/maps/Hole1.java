@@ -185,7 +185,7 @@ public class Hole1 extends Map {
 		int npoints = bar.npoints;
 
 		Line2D.Double lineSeg = new Line2D.Double();
-		Line2D.Double r = new Line2D.Double(ballX - deltaX - 3, ballY - deltaY, ballX + 10, ballY + 5);
+		Line2D.Double r = new Line2D.Double(ballX -  2 * deltaX, ballY - 2 * deltaY, ballX + 10 + 2 * deltaX, ballY + 5 + 2 * deltaY);
 		
 		for (int i = 0; i < npoints - 1; i++) {
 
@@ -197,12 +197,12 @@ public class Hole1 extends Map {
 
 			lineSeg.setLine(x1, y1, x2, y2);
 			
-			Graphics2D g = (Graphics2D) game.getGraphics();
-			game.paintComponent(g);
-			g.setColor(Color.RED);
-			g.draw(lineSeg);
-			g.draw(r);
-			game.repaint();
+//			Graphics2D g = (Graphics2D) game.getGraphics();
+//			game.paintComponent(g);
+//			g.setColor(Color.RED);
+//			g.draw(lineSeg);
+//			g.draw(r);
+//			game.repaint();
 			
 //				System.out.println(lineSeg.ptLineDist(ballX, ballY));
 				if (lineSeg.intersectsLine(r)) {

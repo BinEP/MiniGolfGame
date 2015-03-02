@@ -151,10 +151,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener,
 	public void moves() {
 		// TODO Auto-generated method stub
 
-		
-		calculateBarriers();
 		ballX += deltaX;
 		ballY += deltaY;
+		
+		calculateBarriers();
 		
 //		calculateBarriers();
 		// CShape s = hole.getShape(ball);
@@ -198,12 +198,13 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener,
 		double angle = getAngle();
 		// Line2D.Double line = b.getLineSeg(ballX, ballY);
 
-		rotate(angle, ballX, ballY);
+		rotate(angle, deltaX, deltaY);
 
 	}
 
 	public void rotate(double angle, double endX, double endY) {
 
+		angle = Math.toRadians(angle);
 		double theCos = Math.cos(angle);
 		double theSin = Math.sin(angle);
 
@@ -219,8 +220,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener,
 		double endYVal = rotationMatrix[1][0] * endX + rotationMatrix[1][1]
 				* endY;
 
-		ballX = endXVal;
-		ballY = endYVal;
+		deltaX = endXVal;
+		deltaY = endYVal;
 
 	}
 
